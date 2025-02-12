@@ -22,7 +22,7 @@
         }
 
         .container {
-            background: rgba(252, 251, 251, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -46,7 +46,7 @@
             width: 100%;
             height: 150px;
             padding: 1rem;
-            border: 2px solid #648abb;
+            border: 2px solid #4082d8;
             border-radius: 8px;
             resize: vertical;
             font-size: 1rem;
@@ -86,10 +86,10 @@
             text-align: center;
             font-size: 2rem;
             font-weight: bold;
-            color: #153a7c;
+            color: #314361;
             min-height: 60px;
             padding: 1rem;
-            background: #ffffff;
+            background: #f7fafc;
             border-radius: 8px;
             margin-top: 1rem;
             transition: opacity 0.3s ease;
@@ -108,7 +108,7 @@
             text-align: center;
             margin-top: 2rem;
             font-size: 0.9rem;
-            color: #3f4a5d;
+            color: #4a5568;
         }
 
         .admin-section a {
@@ -158,6 +158,8 @@
         </div>
     </div>
     <script>
+        let lastPickedName = null; // Store the last picked name
+
         function handlePickRandomName() {
             // Play the click sound
             const clickSound = document.getElementById('clickSound');
@@ -228,13 +230,23 @@
 
             // Pick a random name
             const randomIndex = Math.floor(Math.random() * names.length);
-            resultDiv.textContent = names[randomIndex];
+            const newName = names[randomIndex];
+
+            // Clear the result only if the new name is different from the last picked name
+            if (newName !== lastPickedName) {
+                resultDiv.textContent = ''; // Clear the result
+            }
+
+            // Display the new name
+            resultDiv.textContent = newName;
+            lastPickedName = newName; // Update the last picked name
             addConfettiEffect();
         }
 
         function clearAll() {
             document.getElementById('namesInput').value = '';
             document.getElementById('result').textContent = '';
+            lastPickedName = null; // Reset the last picked name
         }
 
         function getNamesArray() {
